@@ -63,8 +63,15 @@ The realistic threats are therefore not data-breach threats:
   Push protection rejects any commit containing a recognized credential pattern
   before it reaches GitHub, which directly addresses risk 4 above — the one
   failure mode that could expose something genuinely sensitive.
+- **A branch ruleset, "Pull request approvals," is active on `main`** (applied
+  from the course template, 7 October 2026). It requires changes to arrive by
+  pull request with code-owner review, and it blocks two destructive operations
+  outright: deletion of the default branch and non-fast-forward (force) pushes
+  that would rewrite published history. No bypass actors are configured, so the
+  rules apply to me as repository owner as well.
 - **`CODEOWNERS`** designates the course instructor as owner of the repository's
-  contents, so any pull request automatically requests their review.
+  contents, so any pull request automatically requests their review. Paired with
+  the ruleset above, this is now enforced rather than advisory.
 - **`.gitignore` excludes local environment and secret-bearing files**:
   `3000-env/` (the virtual environment), `setup_env.py`, `__pycache__/`, and
   `.DS_Store`. Environment setup therefore never enters version control.
@@ -73,24 +80,20 @@ The realistic threats are therefore not data-breach threats:
 - **Two-factor authentication** is required by GitHub for all accounts that
   contribute code, so write access cannot be obtained with a password alone.
 
-### Why heavier controls are not warranted
+### Residual risk accepted
 
-I deliberately have not added a ruleset requiring pull requests and approving
-reviews on `main`. This repository has exactly one author, and the branch
-protection that makes sense on a shared production repository would mean opening
-a pull request to myself for every assignment, adding friction without reducing
-any of the risks identified above. The instructor is already recorded in
-`CODEOWNERS`, and the grading workflow depends on commits appearing on `main`.
+The ruleset above addresses tampering and accidental history loss, but it does
+not address the academic-integrity exposure in risk 1, which follows from the
+repository being a public fork of public course materials. Making it private
+would mitigate that risk and would also break the Gradescope integration the
+assignments depend on, so I note the tradeoff rather than claim it is solved.
 
-The academic-integrity exposure in risk 1 is a consequence of the repository
-being a public fork of public course materials. Making it private would mitigate
-it, and I would do so if the course permitted, but it would also break the
-Gradescope integration that the assignments rely on. I note the tradeoff rather
-than claim it is solved.
+Dependencies remain unpinned (risk 5). Adding a `requirements.txt` would close
+that gap and make results reproducible for a grader; it is not yet done.
 
 If this repository ever held real personal data, a live credential, or more than
-one contributor, that calculus would change and protected branches, required
-reviews, and private visibility would all become necessary.
+one contributor, the controls here would need to be revisited — in particular,
+required approving reviewers above zero and private visibility.
 
 ---
 
