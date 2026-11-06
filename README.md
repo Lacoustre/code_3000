@@ -16,3 +16,11 @@ Your goal is to connect anonymized data back to its source data and check the ma
 
 ### Module 08: Sustainability in Computing
 You will be given a toy dataset and have the opportunity to explore the potential effects of choosing sustainable energy sources to perform computations. You'll code the energy calculation in "sustainability calculations" script, and then you can review the results of various decisions in the "check calculations" notebook. 
+
+## Personal Statement on Ethics
+
+Chapter 5 of *Ethical Machines* argues that most AI ethics statements fail because they are too vague to do any work. "We value fairness" rules nothing out, so it never blocks a decision, and it ends up functioning as public relations rather than as a constraint. Blackman's test is whether a statement is specific enough to tell you what not to ship.
+
+That changed how I think about ethics in this field. I used to treat it mainly as a matter of intent — don't build harmful things. The work in this course convinced me it is closer to an engineering discipline. In Module 04, a model that never saw the protected attribute still predicted 12.8 points lower for one group, because zip code stood in for it. In Module 06, three coarse fields re-identified 42% of an "anonymized" dataset, and every match was correct. Neither failure required anyone to act badly, and neither would have been noticed without someone running the check.
+
+So my position is that good intentions are not a control. What counts is whether specific tests happen before release: measure outcomes across groups, attempt the re-identification attack yourself, and name who absorbs the cost of a decision without having a say in it. An ethics commitment that does not change what gets shipped has not committed to anything.
